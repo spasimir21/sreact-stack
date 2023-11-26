@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  app-nginx:
+    image: nginx:stable-alpine
+    env_file:
+      - ./env/.nginx.env
+    ports:
+      - 80:80
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./dist/frontend:/var/www/frontend
+      - ./public:/var/www/public
+    depends_on:
+      - app-ssr
+  app-ssr:
+    build:
+      context: ./
+      dockerfile: ./containers/dev/service.dockerfile
+    env_file:
+      - ./env/.shared.env
+      - ./env/.ssr.env
+    volumes:
+      - ./dist/frontend/index.html:/app/index.html
+      - ./config/ssr.yml:/app/config/ssr.yml
+      - ./dist/services/ssr:/app/dist
+      - ./proto:/app/proto
+    depends_on:
+      - app-product
+  app-product:
+    build:
+      context: ./
+      dockerfile: ./containers/dev/service.dockerfile
+    env_file:
+      - ./env/.shared.env
+      - ./env/.product.env
+    volumes:
+      - ./config/product.yml:/app/config/product.yml
+      - ./dist/services/product:/app/dist
+      - ./proto:/app/proto

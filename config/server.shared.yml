@@ -1,0 +1,3 @@
+services:
+  ssr: app-ssr
+  auth: app-auth

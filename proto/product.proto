@@ -1,0 +1,15 @@
+import "google/protobuf/empty.proto";
+
+syntax = "proto3";
+
+package product;
+
+service ProductService {
+  rpc GetProducts(google.protobuf.Empty) returns (stream Product) {}
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
