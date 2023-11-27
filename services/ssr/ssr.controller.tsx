@@ -17,6 +17,7 @@ class SSRController {
   async products() {
     const data = await this.ssrService.getProductsSSRData();
 
+    // TODO: if element is null, don't render
     return renderSSR({
       template: this.templateService.templates.centered,
       element: <Products />,

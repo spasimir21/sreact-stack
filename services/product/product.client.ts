@@ -8,6 +8,7 @@ interface ProductClient {
   getProducts(options: {}): Observable<ProductDto>;
 }
 
+// TODO: Add credentials
 const ProductClientModule = ClientsModule.register([
   {
     name: PRODUCT_CLIENT,

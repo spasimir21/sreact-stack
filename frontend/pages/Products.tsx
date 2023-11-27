@@ -1,13 +1,15 @@
 import { useSSRRequest } from '@frontend/api/useSSRRequest';
 import { useRequest } from '@libs/client/requestr';
 import { requests } from '@frontend/api/requests';
+import { _void, id } from '@libs/shared/utils';
 import { SSRLink } from '@libs/client/ssr';
-import { id } from '@libs/shared/utils';
 import React from 'react';
+
+// TODO: Add config for interceptors
 
 function Products() {
   const { result: products } = useSSRRequest('products', requests.product.getAll, {
-    initialParams: null as any
+    initialParams: _void
   });
 
   const createProductRequest = useRequest(requests.product.create);
