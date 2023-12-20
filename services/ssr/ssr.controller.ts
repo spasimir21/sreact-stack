@@ -1,14 +1,12 @@
 import { Controller, Get, Header, Inject } from '@nestjs/common';
-import { TemplateService } from './template.service';
-import Products from '@frontend/pages/Products';
-import { renderSSR } from '@libs/server/ssr';
+import { renderSSR } from '@libs/shared/ssr';
+import { PageService } from './page.service';
 import { SSRService } from './ssr.service';
-import React from 'react';
 
 @Controller()
 class SSRController {
   constructor(
-    @Inject(TemplateService) private readonly templateService: TemplateService,
+    @Inject(PageService) private readonly pageService: PageService,
     @Inject(SSRService) private readonly ssrService: SSRService
   ) {}
 
@@ -17,10 +15,8 @@ class SSRController {
   async products() {
     const data = await this.ssrService.getProductsSSRData();
 
-    // TODO: if element is null, don't render
     return renderSSR({
-      template: this.templateService.templates.centered,
-      element: <Products />,
+      page: this.pageService.pages.products,
       data,
       title: `Products`
     });
@@ -29,7 +25,7 @@ class SSRController {
   @Get('/*')
   @Header('Content-Type', 'text/html')
   fallbackHandler() {
-    return this.templateService.indexSource;
+    return this.pageService.indexSource;
   }
 }
 

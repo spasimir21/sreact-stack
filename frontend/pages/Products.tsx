@@ -1,11 +1,10 @@
 import { useSSRRequest } from '@frontend/api/useSSRRequest';
+import { Login } from '@frontend/components/Login';
 import { useRequest } from '@libs/client/requestr';
 import { requests } from '@frontend/api/requests';
 import { _void, id } from '@libs/shared/utils';
-import { SSRLink } from '@libs/client/ssr';
+import { SSRLink } from '@libs/shared/ssr';
 import React from 'react';
-
-// TODO: Add config for interceptors
 
 function Products() {
   const { result: products } = useSSRRequest('products', requests.product.getAll, {
@@ -39,6 +38,8 @@ function Products() {
       </button>
       <br />
       <SSRLink to='/'>Home</SSRLink>
+      <br />
+      <Login count={products?.length ?? -1} />
     </div>
   );
 }

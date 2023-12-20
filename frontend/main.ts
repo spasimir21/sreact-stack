@@ -1,4 +1,4 @@
-import { initializeReactRoot } from '@libs/client/ssr';
+import { initializeReactRoot } from '@libs/shared/ssr';
 import { router } from './router';
 
 async function main() {

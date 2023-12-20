@@ -1,4 +1,4 @@
-import { SSRLink } from '@libs/client/ssr';
+import { SSRLink } from '@libs/shared/ssr';
 import React, { useState } from 'react';
 
 function Home() {
@@ -11,6 +11,10 @@ function Home() {
       <button onClick={() => setCount(count - 1)}>-</button>
       <br />
       <SSRLink to='/products'>Products</SSRLink>
+      <br />
+      <script>
+        <h1>Tejko</h1>
+      </script>
     </div>
   );
 }

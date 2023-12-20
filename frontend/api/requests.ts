@@ -21,7 +21,7 @@ const product = endpoints(
   {
     getAll: endpoint<void, ProductDto[]>({
       request: combine(get, path('/products')),
-      response: jsonResponse
+      response: combine(jsonResponse)
     }),
     create: endpoint<ProductDto, void>({
       request: combine(post, path('/'), jsonBody)

@@ -5,4 +5,8 @@ const errorCode = (response: Response) => {
 
 const jsonResponse = (response: Response) => response.json();
 
-export { errorCode, jsonResponse };
+const mockError = (message: string) => () => {
+  throw new Error(message);
+};
+
+export { errorCode, jsonResponse, mockError };

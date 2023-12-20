@@ -22,7 +22,8 @@ function endpoints<T>(base: RequestrRequest, requests: T): T {
     newRequests[key] = {
       request: combineTwo(base.request, request.request),
       executor: request.executor ?? base.executor,
-      response: combineTwo(base.response, request.response)
+      response: combineTwo(base.response, request.response),
+      error: combineTwo(base.error, request.error)
     };
   }
 

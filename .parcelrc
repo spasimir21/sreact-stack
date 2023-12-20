@@ -1,5 +1,10 @@
 {
   "extends": "@parcel/config-default",
+  "transformers": {
+    "bundle-text-static:*": [
+      "@parcel/transformer-inline-string"
+    ]
+  },
   "resolvers": [
     "parcel-resolver-ignore",
     "parcel-resolver-ts-base-url",

@@ -1,3 +1,4 @@
+import { GLOBAL_SSR_DATA_STACK } from './SSRDataStack';
 import { isClient } from './isClient';
 
 let SSR_DATA: any = null;
@@ -11,9 +12,7 @@ function initializeSSRData() {
 }
 
 function getSSRDataValue<T>(key: string, defaultValue: T): T {
-  if (!isClient())
-    // @ts-ignore
-    return process.$SSR_DATA_STACK.peek()[key] as T;
+  if (!isClient()) return GLOBAL_SSR_DATA_STACK.peek()[key] as T;
 
   return SSR_DATA ? SSR_DATA[key] : defaultValue;
 }

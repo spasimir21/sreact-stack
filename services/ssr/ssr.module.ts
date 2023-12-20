@@ -1,20 +1,20 @@
 import { ProductClientModule } from '@services/product/product.client';
-import { TemplateService } from './template.service';
 import { SSRController } from './ssr.controller';
 import { Inject, Module } from '@nestjs/common';
 import { SSRConfigProvider } from './config';
+import { PageService } from './page.service';
 import { SSRService } from './ssr.service';
 
 @Module({
   imports: [ProductClientModule],
   controllers: [SSRController],
-  providers: [SSRConfigProvider, TemplateService, SSRService]
+  providers: [SSRConfigProvider, PageService, SSRService]
 })
 class SSRModule {
-  constructor(@Inject(TemplateService) private readonly templateService: TemplateService) {}
+  constructor(@Inject(PageService) private readonly pageService: PageService) {}
 
   async onModuleInit() {
-    await this.templateService.loadTemplates();
+    await this.pageService.loadPages();
   }
 }
 
